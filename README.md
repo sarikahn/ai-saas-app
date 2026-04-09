@@ -5,7 +5,7 @@ A full-stack AI-powered SaaS application built using the MERN stack that allows 
 ---
 
 ## 🌐 Live Demo
-🔗 https://your-vercel-link
+🔗 https://ai-saas-app-one.vercel.app/
 
 ## 📂 GitHub Repository
 🔗 https://github.com/sarikahn/ai-saas-app
