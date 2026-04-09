@@ -1,16 +1,24 @@
-const router = require("express").Router();
-const Workspace = require("../models/Workspace");
+const express = require("express");
+const router = express.Router();
 
-// Create workspace
-router.post("/", async (req, res) => {
-  const ws = await Workspace.create(req.body);
-  res.json(ws);
+let workspaces = [];
+
+/* CREATE WORKSPACE */
+router.post("/", (req, res) => {
+  const { name } = req.body;
+
+  const workspace = {
+    id: Date.now(),
+    name
+  };
+
+  workspaces.push(workspace);
+  res.json(workspace);
 });
 
-// Get user workspaces
-router.get("/:userId", async (req, res) => {
-  const ws = await Workspace.find({ userId: req.params.userId });
-  res.json(ws);
+/* GET WORKSPACES */
+router.get("/", (req, res) => {
+  res.json(workspaces);
 });
 
 module.exports = router;

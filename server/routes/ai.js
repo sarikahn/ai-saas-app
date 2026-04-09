@@ -1,21 +1,13 @@
-const router = require("express").Router();
-const axios = require("axios");
+const express = require("express");
+const router = express.Router();
 
-router.post("/", async (req, res) => {
-  const response = await axios.post(
-    "https://api.openai.com/v1/chat/completions",
-    {
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: req.body.prompt }]
-    },
-    {
-      headers: {
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`
-      }
-    }
-  );
+/* AI GENERATE (DUMMY FOR NOW) */
+router.post("/generate", (req, res) => {
+  const { prompt } = req.body;
 
-  res.json(response.data.choices[0].message);
+  const response = `AI Response for: ${prompt}`;
+
+  res.json({ result: response });
 });
 
 module.exports = router;

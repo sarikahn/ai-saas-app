@@ -1,24 +1,50 @@
-const router = require("express").Router();
-const Note = require("../models/Note");
+const express = require("express");
+const router = express.Router();
 
-// Create note
+// TEMP STORAGE
+let notes = [];
 
-// Make note public
-router.put("/share/:id", async (req, res) => {
-  const note = await Note.findByIdAndUpdate(
-    req.params.id,
-    { isPublic: true },
-    { new: true }
+/* CREATE NOTE */
+router.post("/", (req, res) => {
+  const { title, content } = req.body;
+
+  const note = {
+    id: Date.now(),
+    title,
+    content
+  };
+
+  notes.push(note);
+  res.json(note);
+});
+
+/* GET ALL NOTES */
+router.get("/", (req, res) => {
+  res.json(notes);
+});
+
+/* UPDATE NOTE */
+router.put("/:id", (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+
+  notes = notes.map(note =>
+    note.id == id ? { ...note, title, content } : note
   );
-  res.json(note);
+
+  res.json({ message: "Note updated" });
 });
 
-// Get public note
-router.get("/public/:id", async (req, res) => {
-  const note = await Note.findById(req.params.id);
-  if (!note.isPublic) return res.status(403).send("Private");
-  res.json(note);
+/* DELETE NOTE */
+router.delete("/:id", (req, res) => {
+  const { id } = req.params;
+
+  notes = notes.filter(note => note.id != id);
+
+  res.json({ message: "Note deleted" });
 });
+
+module.exports = router;
 
 
 
