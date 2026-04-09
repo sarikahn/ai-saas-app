@@ -87,6 +87,8 @@ Client (React) → API (Express) → Database (MongoDB)
 git clone https://github.com/sarikahn/ai-saas-app.git
 cd ai-saas-app
 
+
+screenshots
 ### 🔑 Login Page
 ![Login](./screenshots/login.png)
 
